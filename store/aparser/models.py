@@ -12,3 +12,6 @@ class Product(models.Model):
     img_links = models.ManyToManyField(Image, verbose_name='Ссылки на изображения')
     link = models.URLField(verbose_name='Ссылка')
 
+    class Meta:
+        verbose_name = 'Продукт'
+        verbose_name_plural = 'Продукты'
