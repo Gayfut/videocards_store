@@ -7,3 +7,4 @@ class ProductForm(forms.ModelForm):
         model = Product
         fields = ('name', 'price', 'address', 'link')
         widgets = {'name': forms.TextInput, 'address': forms.TextInput}
+

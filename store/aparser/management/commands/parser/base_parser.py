@@ -13,7 +13,7 @@ from .settings import (
     success_search_selector,
 )
 
-from aparser.models import Product
+from aparser.models import Product, Image
 
 
 class BaseParser:
@@ -114,11 +114,6 @@ class BaseParser:
         img_elements = self.__browser.find_elements_by_css_selector(
             img_element_selector
         )
-        img_links = []
-
-        for img_element in img_elements:
-            img_link = img_element.get_attribute(img_link_attribute)
-            img_links.append(img_link)
 
         product = Product(
             name=self.__browser.find_element_by_css_selector(
@@ -128,9 +123,13 @@ class BaseParser:
             address=self.__browser.find_element_by_css_selector(
                 self.ADDRESS_SELECTOR
             ).text,
-            img_links=img_links,
             link=link_to_product,
         ).save()
+
+        for img_element in img_elements:
+            img_link = img_element.get_attribute(img_link_attribute)
+            img_link = Image(img_link=img_link, product=product).save()
+
         print(link_to_product)
 
     def __get_product_price(self):
