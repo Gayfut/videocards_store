@@ -5,7 +5,7 @@ class Product(models.Model):
     name = models.TextField(verbose_name='Название')
     price = models.PositiveIntegerField(verbose_name='Цена')
     address = models.TextField(verbose_name='Адрес')
-    link = models.URLField(verbose_name='Ссылка')
+    link = models.URLField(verbose_name='Ссылка', unique=True)
 
     class Meta:
         verbose_name = 'Продукт'

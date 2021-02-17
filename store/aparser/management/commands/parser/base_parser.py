@@ -124,11 +124,12 @@ class BaseParser:
                 self.ADDRESS_SELECTOR
             ).text,
             link=link_to_product,
-        ).save()
+        )
+        product.save()
 
         for img_element in img_elements:
             img_link = img_element.get_attribute(img_link_attribute)
-            img_link = Image(img_link=img_link, product=product).save()
+            img_link = Image(link=img_link, product=product).save()
 
         print(link_to_product)
 

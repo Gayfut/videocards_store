@@ -8,3 +8,4 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         parser = Parser1()
         parser.start_pars()
+        parser.stop_pars()
