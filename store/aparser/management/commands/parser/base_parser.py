@@ -13,7 +13,7 @@ from .settings import (
     success_search_selector,
 )
 
-from aparser.models import Product, Image
+from products.models import Product, Image
 
 
 class BaseParser:

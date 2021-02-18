@@ -1,0 +1,15 @@
+{% extends "products/base.html" %}
+
+{% block content %}
+    <p> Below are the videocards </p>
+    {% for product in products %}
+    <ul>
+        <li> Title: {{ product.name }} </li>
+        <li> Price: {{ product.price }} </li>
+        <li> Address: {{ product.address }} </li>
+    </ul>
+    <a href="{{ product.link }}"> Link: {{ product.link }} </a>
+    <br><br><br>
+    {% endfor %}
+
+{% endblock %}
