@@ -115,21 +115,32 @@ class BaseParser:
             img_element_selector
         )
 
-        product = Product(
-            name=self.__browser.find_element_by_css_selector(
+        try:
+            product = Product.objects.get(link=link_to_product)
+            product.name = self.__browser.find_element_by_css_selector(
                 self.NAME_SELECTOR
-            ).text,
-            price=self.__get_product_price(),
-            address=self.__browser.find_element_by_css_selector(
+            ).text
+            product.price = self.__get_product_price()
+            product.address = self.__browser.find_element_by_css_selector(
                 self.ADDRESS_SELECTOR
-            ).text,
-            link=link_to_product,
-        )
-        product.save()
+            ).text
+            product.save()
+        except Product.DoesNotExist:
+            product = Product(
+                name=self.__browser.find_element_by_css_selector(
+                    self.NAME_SELECTOR
+                ).text,
+                price=self.__get_product_price(),
+                address=self.__browser.find_element_by_css_selector(
+                    self.ADDRESS_SELECTOR
+                ).text,
+                link=link_to_product,
+            )
+            product.save()
 
-        for img_element in img_elements:
-            img_link = img_element.get_attribute(img_link_attribute)
-            img_link = Image(link=img_link, product=product).save()
+            for img_element in img_elements:
+                img_link = img_element.get_attribute(img_link_attribute)
+                img_link = Image(link=img_link, product=product).save()
 
         print(link_to_product)
 
