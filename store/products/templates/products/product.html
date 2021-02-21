@@ -1,14 +1,15 @@
 {% extends "products/base.html" %}
+{% load static %}
 
 {% block content %}
-    <p> Below are the videocards </p>
     {% for product in products %}
+    <img class="product-image" src="{{ product.image.link}}">
     <ul>
-        <li> Title: {{ product.name }} </li>
-        <li> Price: {{ product.price }} </li>
-        <li> Address: {{ product.address }} </li>
+        <li> Title: {{ product.product.name}} </li>
+        <li> Price: {{ product.product.price }} ₽ </li>
+        <li> Address: {{ product.product.address }} </li>
     </ul>
-    <a href="{{ product.link }}"> Link: {{ product.link }} </a>
+    <a class="product-link" href="{{ product.product.link }}"> Tap for get more info... </a>
     <br><br><br>
     {% endfor %}
 

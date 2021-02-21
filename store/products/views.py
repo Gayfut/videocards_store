@@ -10,7 +10,17 @@ class ProductView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = {
-            "images": Image.objects.all(),
-            "products": Product.objects.all()
+            "products": self.__get_images(),
         }
         return context
+
+    def __get_images(self):
+        products_without_images = Product.objects.all()
+        products = []
+
+        for product in products_without_images:
+            _image = Image.objects.filter(product=product).first()
+            _product = {"product": product, "image": _image}
+            products.append(_product)
+
+        return products

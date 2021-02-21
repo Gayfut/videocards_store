@@ -2,12 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'products/base.css' %}" />
+    <title>Videocards</title>
 </head>
 <body>
-    <div class="container-fluid">
-      <div class="row">
-        {% block content %} {% endblock %}
+    <div class="wrapper">
+      <div class="products">
+          <p> Below are the videocards: </p>
+            {% block content %} {% endblock %}
         </div>
     </div>
 </body>
