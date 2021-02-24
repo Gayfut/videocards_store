@@ -7,5 +7,5 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         parser = Parser1()
-        parser.start_pars()
+        parser.start_pars(1)
         parser.stop_pars()

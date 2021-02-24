@@ -9,6 +9,7 @@ from .settings import (
     price_selector1,
     name_selector1,
     address_selector1,
+    next_page_selector1,
 )
 
 
@@ -22,3 +23,4 @@ class Parser1(BaseParser):
     PRICE_SELECTOR = price_selector1
     NAME_SELECTOR = name_selector1
     ADDRESS_SELECTOR = address_selector1
+    NEXT_PAGE_SELECTOR = next_page_selector1
