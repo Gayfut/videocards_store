@@ -51,7 +51,7 @@ class BaseParser:
             success_search = self.__check_success_search()
 
         for _step in range(pages_count):
-            self.__get_products_info()
+            self.__save_products_info()
             self.__next_page()
 
     def __next_page(self):
@@ -87,7 +87,7 @@ class BaseParser:
 
         return True
 
-    def __get_products_info(self):
+    def __save_products_info(self):
         """open new tab, parse links and return info about products"""
         products_links = self.__get_links()
         products_links = [link for link, _ in groupby(products_links)]
@@ -131,26 +131,18 @@ class BaseParser:
 
         try:
             product = Product.objects.get(link=link_to_product)
-            product.name = self.__browser.find_element_by_css_selector(
-                self.NAME_SELECTOR
-            ).text
-            product.price = self.__get_product_price()
-            product.address = address
-            product.save()
         except Product.DoesNotExist:
-            product = Product(
-                name=self.__browser.find_element_by_css_selector(
-                    self.NAME_SELECTOR
-                ).text,
-                price=self.__get_product_price(),
-                address=address,
-                link=link_to_product,
-            )
-            product.save()
+            product = Product(link=link_to_product)
+        product.name = self.__browser.find_element_by_css_selector(
+            self.NAME_SELECTOR
+        ).text
+        product.price = self.__get_product_price()
+        product.address = address
+        product.save()
 
-            for img_element in img_elements:
-                img_link = img_element.get_attribute(img_link_attribute)
-                img_link = Image(link=img_link, product=product).save()
+        for img_element in img_elements:
+            img_link = img_element.get_attribute(img_link_attribute)
+            Image(link=img_link, product=product).save()
 
     def __get_product_price(self):
         """return product price"""

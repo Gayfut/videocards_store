@@ -1,5 +1,3 @@
-# from django.http import HttpResponse
-# from django.shortcuts import render
 from django.views.generic import TemplateView
 
 from products.models import Product, Image
@@ -10,11 +8,12 @@ class ProductView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = {
-            "products": self.__get_images(),
+            "products": self.__get_products(),
         }
         return context
 
-    def __get_images(self):
+    @staticmethod
+    def __get_products():
         products_without_images = Product.objects.all()
         products = []
 
