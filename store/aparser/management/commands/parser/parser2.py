@@ -1,8 +1,8 @@
 """file control parser2 specification (parser is not active, need rework)
 """
 from selenium.common.exceptions import NoSuchElementException
-from parser.base_parser import BaseParser
-from parser.settings import (
+from .base_parser import BaseParser
+from .settings import (
     link_to_site2,
     search_margin_selector2,
     search_button_selector2,

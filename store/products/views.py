@@ -4,9 +4,11 @@ from products.models import Product, Image
 
 
 class ProductView(TemplateView):
+    """view for showing product in main page"""
     template_name = "products/product.html"
 
     def get_context_data(self, *args, **kwargs):
+        """return context with info in main page"""
         context = {
             "products": self.__get_products(),
         }
@@ -14,6 +16,7 @@ class ProductView(TemplateView):
 
     @staticmethod
     def __get_products():
+        """return info about products"""
         products_without_images = Product.objects.all()
         products = []
 
